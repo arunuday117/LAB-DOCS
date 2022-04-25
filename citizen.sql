@@ -18,3 +18,12 @@ insert into citizen values("Kannappi",18,7871);
 insert into citizen values("Kochunni",49,7975);
 select * from voters;
 select * from citizen;
+
+//trigger
+CREATE DEFINER=`root`@`localhost` TRIGGER `details`.`citizen_AFTER_INSERT` AFTER INSERT ON `citizen` FOR EACH ROW
+BEGIN
+if(new.age>=18)
+then
+insert into Voters set Name=new.Name,Adhar=new.Adhar;
+end if;
+END
